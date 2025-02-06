@@ -1,7 +1,20 @@
-import React, { useState } from "react";
-import "./NewExpenseForm.css";
+import React, { FC, useState } from "react";
+import "./ExpenseForm.css";
 
-function NewExpenseForm() {
+export interface IExpenseForm {
+  title: string;
+  amount: string;
+  date: string;
+  id?: string;
+}
+
+interface IFormProps {
+  onSubmitExpenseForm: (data: IExpenseForm) => void;
+}
+
+const ExpenseForm: FC<IFormProps> = ({
+  onSubmitExpenseForm: saveExpenseFormHandler,
+}) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
@@ -20,12 +33,12 @@ function NewExpenseForm() {
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const expenseData = {
+    const expenseData: IExpenseForm = {
       title: title,
       amount: amount,
       date: date,
     };
-    console.group(expenseData);
+    saveExpenseFormHandler(expenseData);
     setTitle("");
     setAmount("");
     setDate("");
@@ -35,11 +48,11 @@ function NewExpenseForm() {
     <form onSubmit={onSubmitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
-          <label>Title</label>
+          <label htmlFor="title">Title</label>
           <input type="text" value={title} onChange={onTitleHandler} />
         </div>
         <div className="new-expense__control">
-          <label>Amount</label>
+          <label htmlFor="amount">Amount</label>
           <input
             type="number"
             min={0.01}
@@ -49,7 +62,7 @@ function NewExpenseForm() {
           />
         </div>
         <div className="new-expense__control">
-          <label>Date</label>
+          <label htmlFor="date">Date</label>
           <input type="date" value={date} onChange={onDateHandler} />
         </div>
       </div>
@@ -58,6 +71,6 @@ function NewExpenseForm() {
       </div>
     </form>
   );
-}
+};
 
-export default NewExpenseForm;
+export default ExpenseForm;
