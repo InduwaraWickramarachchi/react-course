@@ -1,37 +1,25 @@
+import { FC } from "react";
 import ExpenseItem from "../ExpenseItem/ExpenseItem";
 import "./Expenses.css";
+import { IExpenseForm } from "../NewExpenseForm/ExpenseForm";
 
-const expense_details = [
-  {
-    date: new Date(),
-    title: "Car Insurance",
-    price: "$332.43",
-  },
-  {
-    date: new Date(),
-    title: "Life Insurance",
-    price: "$435.24",
-  },
-  {
-    date: new Date(),
-    title: "Property Insurance",
-    price: "$1332.43",
-  },
-];
+interface IExpenses {
+  expenses: IExpenseForm[];
+}
 
-function Expenses() {
+const Expenses: FC<IExpenses> = ({ expenses }) => {
   return (
     <div className="expenses">
-      {expense_details.map((item) => (
+      {expenses.map((item) => (
         <ExpenseItem
           date={item.date}
           title={item.title}
-          price={item.price}
+          amount={item.amount}
           key={item.title}
         />
       ))}
     </div>
   );
-}
+};
 
 export default Expenses;

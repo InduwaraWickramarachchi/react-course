@@ -1,14 +1,9 @@
 import { useState } from "react";
 import DateFormat from "../DateFormat/DateFormat";
 import "./ExpenseItem.css";
+import { IExpenseForm } from "../NewExpenseForm/ExpenseForm";
 
-export interface IExpense {
-  date: Date;
-  title: string;
-  price: string;
-}
-
-function ExpenseItem(props: Readonly<IExpense>) {
+function ExpenseItem(props: Readonly<IExpenseForm>) {
   const [title, setTitle] = useState(props.title);
 
   const clickHandler = () => {
@@ -20,7 +15,7 @@ function ExpenseItem(props: Readonly<IExpense>) {
       <DateFormat date={props.date} />
       <div className="expense-item__description">
         <h2>{title}</h2>
-        <div className="expense-item__price"> {props.price} </div>
+        <div className="expense-item__price"> {props.amount} </div>
       </div>
       <button onClick={clickHandler}>change Title</button>
     </div>
