@@ -1,10 +1,11 @@
 import "./DateFormat.css";
 
-function DateFormat(props: Readonly<{ date: Date }>) {
+function DateFormat(props: Readonly<{ date: string }>) {
+  const dateObject = new Date(props.date).toDateString();
   const date = {
-    day: props.date.toLocaleString("en-US", { day: "2-digit" }),
-    month: props.date.toLocaleString("en-US", { month: "long" }),
-    year: props.date.getFullYear(),
+    day: dateObject.split(" ")[2],
+    month: dateObject.split(" ")[1],
+    year: dateObject.split(" ")[3],
   };
   return (
     <div className="expense-date">

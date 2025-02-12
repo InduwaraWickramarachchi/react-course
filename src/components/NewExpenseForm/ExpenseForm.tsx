@@ -2,9 +2,9 @@ import React, { FC, useState } from "react";
 import "./ExpenseForm.css";
 
 export interface IExpenseForm {
+  date: string;
   title: string;
   amount: string;
-  date: string;
   id?: string;
 }
 
